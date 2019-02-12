@@ -5,8 +5,8 @@ body{
 }
 #container img {
     max-width: 100%;
-    width: 100%!important;
-    height: auto!important;
+    /*width: 100%!important;*/
+    height: auto;
 }
 #container {
     max-width: 100%;
