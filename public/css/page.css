@@ -1,0 +1,97 @@
+body{
+    overflow-x:hidden;
+    overflow-y:auto;
+
+}
+#container img {
+    max-width: 100%;
+    width: 100%!important;
+    height: auto!important;
+}
+#container {
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+* {
+    font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    padding: 0;
+    margin: 0
+}
+
+body, html {
+    width: 100%;
+    height: 100%
+}
+
+body > a {
+    display: none;
+}
+
+#loadingQ {
+    -webkit-animation: change 2s linear infinite;
+    background: url(https://p.qpic.cn/pic_wework/3153013172/7f791a73a11ac176950371bd9f68bcd646d5fb3a95fe21b4/0) 100% 100% no-repeat;
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9988;
+}
+
+@-webkit-keyframes change {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.aa {
+    visibility: visible;
+    background: #333;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.bb {
+    background: url(https://p.qpic.cn/pic_wework/3153013172/7d7b1871dc5624f7f33c1723d0566bd03da8c2b98ac48b97/0) 100% 100% no-repeat;
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9988;
+}
+
+.play img {
+    background-color:rgba(0,0,255,0.5);
+    position: fixed;
+    margin-top: 35px;
+    margin-left: -45px;
+    left: 100%;
+    border-radius: 17px;
+}
+.back img {
+    background-color:rgba(0,0,255,0.5);
+    position: fixed;
+    margin-top: 35px;
+    margin-right: -45px;
+    right: 100%;
+    border-radius: 17px;
+}
