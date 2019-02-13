@@ -3,6 +3,7 @@
     {{--统计代码--}}
     {!! $article['cnzz'] !!}
 </div>
+
 <script>
     ready(function () {
         hh();
@@ -17,20 +18,24 @@
                 @if($article['is_encryption'] == 1)
                     @if($status == 'show' && $article['iframe'] != 1)
                         var html = document.getElementById('container').innerHTML;
-                        document.getElementById('container').innerHTML =  utf8to16(atob(html));
+                        document.getElementById('container').innerHTML = utf8to16(atob(html));
                     @endif
                     @if($status == 'iframe')
-                    var html = document.getElementById('container').innerHTML;
-                    document.getElementById('container').innerHTML =  utf8to16(atob(html));
+                        var html = document.getElementById('container').innerHTML;
+                        document.getElementById('container').innerHTML = utf8to16(atob(html));
                     @endif
-                @endif
+               @endif
     });
 </script>
+
+
+
 <script>
     window.onhashchange = function () {
         //物理按键点击了返回
         location.replace("{{$article['physics']}}");
     };
 </script>
+
 </body>
 </html>
