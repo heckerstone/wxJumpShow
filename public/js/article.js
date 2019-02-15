@@ -119,7 +119,7 @@ function log(event) {
     });
 }
 
-function request(url, method, data) {
+function request(url, method, data = []) {
     let _token = document.getElementById('_token').getAttribute('content');
     let X_CSRF_TOKEN = document.getElementById('X_CSRF_TOKEN').getAttribute('content');
     let sendData = '';
@@ -145,12 +145,74 @@ function request(url, method, data) {
             } else {
                 return JSON.parse(ajax.responseText);
             }
-        } else {
-            console.log(ajax);
         }
     };
 }
 
 function jump(url) {
     window.location.replace(url)
+}
+
+function getArticle()
+{
+    let _token = document.getElementById('_token').getAttribute('content');
+    let X_CSRF_TOKEN = document.getElementById('X_CSRF_TOKEN').getAttribute('content');
+    let url = document.getElementById('url').value;
+
+    let articleAjax = new XMLHttpRequest();
+    articleAjax.open('post', url);
+    articleAjax.setRequestHeader('_token', _token);
+    articleAjax.setRequestHeader('X-CSRF-TOKEN', X_CSRF_TOKEN);
+    articleAjax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    articleAjax.send();
+
+    articleAjax.onreadystatechange = function () {
+        if (articleAjax.readyState == 4 && articleAjax.status == 200) {
+            if (typeof articleAjax.responseText == "undefined" || articleAjax.responseText == null || articleAjax.responseText == "") {
+                return null;
+            } else {
+                handelArticle(JSON.parse(articleAjax.responseText));
+            }
+        }
+    };
+
+}
+
+function handelArticle(article) {
+    let content = article.content;
+    //标题
+    let title = article.title;
+    //箭头跳转
+    let arrow = article.arrow;
+    //统计代码
+    let cnzz = article.cnzz;
+    //音乐链接
+    let music = article.music;
+    //物理按键返回
+    let physics = article.physics;
+
+    //设置主体内容
+    setTimeout(function () {
+        document.getElementById('divId').innerHTML = content;
+    }, 200);
+    document.getElementById('title').innerText = title;
+    //统计代码
+    document.getElementById('total').innerHTML = cnzz;
+    //背景音乐
+    if (music.length != 0) {
+       document.getElementById('audio').innerHTML =  "<audio id='music' autoplay loop='loop' preload='auto' autoplay='autoplay'>" +
+           "<source autoplay src='" + music + "' type='audio/mp3' />" +
+           "</audio>" +
+           "<img id='musicImg' class='div1' onclick='controlMusic()' " +
+           "src='//pub-files.jinshuju.net/di/20181015160315_5fca3a' style='width: 30px;'/>"
+    }
+
+    //返回跳转
+    if (!arrow.length == 0) {
+       document.getElementById('fhui').innerHTML =
+           "<a target='_blank' href='" + arrow + "'> " +
+           "<img class='div3' src='//pub-files.jinshuju.net/di/20181015160222_ae4f6c' style='width: 30px;'/>" +
+           "</a>";
+    }
+
 }

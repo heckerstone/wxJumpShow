@@ -10,6 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/report', function () {
+    return view('report');
+});
+Route::get('/report2', function () {
+    return view('report2');
+});
+Route::get('/report3', function () {
+    return view('report3');
+});
+Route::post('/ajax/{id}', function ($id) {
+   $article = \Illuminate\Support\Facades\DB::table('articles')
+       ->where('id', $id)
+       ->first();
+   return response()->json($article);
+});
+
 Route::get('A-url/{id}', 'AurlController@index');
 Route::get('show/{id}','ShowController@index');
 Route::get('frame/{id}','IframeController@index');

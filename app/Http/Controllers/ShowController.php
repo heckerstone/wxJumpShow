@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\SourceCheckException;
+use App\Http\Controllers\Article\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -25,16 +26,23 @@ class ShowController extends Controller
     {
         $this->article = DB::table('articles')
             ->find($id);
-        //来源检测
-        $this->previous($request);
+
         //改自增的字段值进行自增
         $this->increment($this->article->id);
-        //日志记录
-        $logId = $this->visitLog();
-        $aUrl = $this->randomAUrl($this->article->user_id);
+
         if (!empty($this->article->right_now)) { //立即跳转
             return redirect($this->article->right_now);
         }
+        //日志记录
+        $logId = $this->visitLog();
+
+        if (!empty($this->article->template_id)) {
+            return (new Template($this->article, $logId))->allot();
+        }
+        //来源检测
+        $this->previous($request);
+        $aUrl = $this->randomAUrl($this->article->user_id);
+
         if ($this->article->is_encryption == 1) { //加密文章
             $content = $this->encryptionArticle();
         }
