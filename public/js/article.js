@@ -61,7 +61,6 @@ window.onload = function(){
         audioEl.play(); // iOS 7/8 仅需要 play 一下
     }
     var audioEl = document.getElementById('music');
-    console.log(audioEl);
     if (audioEl) {
         audioEl.addEventListener('play', function () {
             console.log('play');
@@ -75,10 +74,14 @@ window.onload = function(){
         // 因此我们通过一个用户交互事件来主动 play 一下 audio.
         window.addEventListener('touchstart', forceSafariPlayAudio, false);
     }
-    document.getElementById('arrow').onclick = function () {
-        log('箭头跳转');
-        jump(document.getElementById('arrow').getAttribute('url'));
-    };
+    let arrow = document.getElementById('arrow');
+    if (arrow) {
+        arrow.onclick = function () {
+            log('箭头跳转');
+            jump(document.getElementById('arrow').getAttribute('url'));
+        };
+    }
+
     document.onclick = function () {
         log('页面点击');
     };
@@ -167,7 +170,6 @@ function getArticle()
             }
         }
     };
-
 }
 
 function handelArticle(article) {
@@ -191,7 +193,7 @@ function handelArticle(article) {
     //统计代码
     document.getElementById('total').innerHTML = cnzz;
     //背景音乐
-    if (music.length != 0) {
+    if (music) {
        document.getElementById('audio').innerHTML =  "<audio id='music' autoplay loop='loop' preload='auto' autoplay='autoplay'>" +
            "<source autoplay src='" + music + "' type='audio/mp3' />" +
            "</audio>" +
@@ -200,7 +202,7 @@ function handelArticle(article) {
     }
 
     //返回跳转
-    if (!arrow.length == 0) {
+    if (arrow) {
        document.getElementById('fhui').innerHTML =
            "<a target='_blank' href='" + arrow + "'> " +
            "<img class='div3' src='//pub-files.jinshuju.net/di/20181015160222_ae4f6c' style='width: 30px;'/>" +

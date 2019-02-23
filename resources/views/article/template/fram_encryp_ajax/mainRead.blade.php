@@ -10,7 +10,6 @@
     <meta id="X_CSRF_TOKEN" name="X-CSRF-TOKEN" content="{{ csrf_token() }}" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <script src="/js/article.js"></script>
     @if(!empty($result->physics))
         <script>
             window.onhashchange = function () {

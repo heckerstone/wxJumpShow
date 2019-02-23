@@ -11,6 +11,7 @@
     <meta id="_token" name="csrf-token" content="{{ csrf_token() }}" />
     <meta id="X_CSRF_TOKEN" name="X-CSRF-TOKEN" content="{{ csrf_token() }}" />
     <title id="title"></title>
+    <script src="/js/article.js"></script>
 </head>
 <body style="margin:0px auto;width:100%;max-width:685px;">
 <style>
@@ -161,7 +162,7 @@
 
 <div class="item_wrap rel" style="padding:0px;">
     <ul style="list-style-type:none;">
-        @if(!empty($article->music))
+        @if(!empty($article->arrow))
             <div id="fhui"></div>
         @endif
         <div class="mains" style="overflow:hidden;height:1px;">
