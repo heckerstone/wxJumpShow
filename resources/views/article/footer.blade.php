@@ -5,7 +5,7 @@
 </div>
 
 <script>
-    ready(function () {
+    window.onload = function () {
         hh();
                 @if($article['appid'] != '' && $article['key'] != '')
                     @php
@@ -25,10 +25,8 @@
                         document.getElementById('container').innerHTML = utf8to16(atob(html));
                     @endif
                @endif
-    });
+    };
 </script>
-
-
 
 <script>
     window.onhashchange = function () {

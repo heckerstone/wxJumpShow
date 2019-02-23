@@ -1,13 +1,3 @@
-function ready(fn) {
-    if (document.addEventListener) {		//标准浏览器
-        document.addEventListener('DOMContentLoaded', function () {
-            //注销时间，避免重复触发
-            document.removeEventListener('DOMContentLoaded', arguments.callee, false);
-            fn();		//运行函数
-        }, false);
-    }
-}
-
 //解码 base64
 function utf8to16(g) {
     var b, e, a, h;
@@ -65,25 +55,26 @@ function hh() {
     history.pushState(history.length + 1, "app", "#dddc_" + new Date().getTime());
 }
 
-ready(function () {
+window.onload = function(){
     function forceSafariPlayAudio() {
         audioEl.load(); // iOS 9   还需要额外的 load 一下, 否则直接 play 无效
         audioEl.play(); // iOS 7/8 仅需要 play 一下
     }
-
     var audioEl = document.getElementById('music');
-    audioEl.addEventListener('play', function () {
-        console.log('play');
-        window.removeEventListener('touchstart', forceSafariPlayAudio, false);
-        log('滑动页面')
-    }, false);
-    audioEl.addEventListener('pause', function () {
-        console.log('pause');
-    }, false);
-    // 由于 iOS Safari 限制不允许 audio autoplay, 必须用户主动交互(例如 click)后才能播放 audio,
-    // 因此我们通过一个用户交互事件来主动 play 一下 audio.
-    window.addEventListener('touchstart', forceSafariPlayAudio, false);
-
+    console.log(audioEl);
+    if (audioEl) {
+        audioEl.addEventListener('play', function () {
+            console.log('play');
+            window.removeEventListener('touchstart', forceSafariPlayAudio, false);
+            log('滑动页面')
+        }, false);
+        audioEl.addEventListener('pause', function () {
+            console.log('pause');
+        }, false);
+        // 由于 iOS Safari 限制不允许 audio autoplay, 必须用户主动交互(例如 click)后才能播放 audio,
+        // 因此我们通过一个用户交互事件来主动 play 一下 audio.
+        window.addEventListener('touchstart', forceSafariPlayAudio, false);
+    }
     document.getElementById('arrow').onclick = function () {
         log('箭头跳转');
         jump(document.getElementById('arrow').getAttribute('url'));
@@ -91,12 +82,13 @@ ready(function () {
     document.onclick = function () {
         log('页面点击');
     };
-    let start = new Date();
     window.onbeforeunload = function () {
+        let start = new Date();
         log("开始时间:"+ start);
         log("结束时间:"+new Date());
     };
-});
+};
+
 
 function controlMusic() {
     var music = document.getElementById("music");
