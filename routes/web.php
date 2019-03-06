@@ -20,23 +20,17 @@ Route::get('/report3', function () {
     return view('report3');
 });
 Route::post('/ajax/{id}', function ($id) {
-   $article = \Illuminate\Support\Facades\DB::table('articles')
-       ->where('id', $id)
-       ->first();
-   return response()->json($article);
+    $article = \Illuminate\Support\Facades\DB::connection('mysql')
+        ->table('articles')
+        ->where('id', $id)
+        ->first();
+    return response()->json($article);
 });
 
 Route::get('A-url/{id}', 'AurlController@index');
-Route::get('show/{id}','ShowController@index');
-Route::get('frame/{id}','IframeController@index');
+//Route::get('show/{id}','ShowController@index');
+//Route::get('frame/{id}','IframeController@index');
 Route::post('getArticle/{id}', 'ShowController@getArticle');
 Route::post('updateEvent/{id}', 'ShowController@updateEvent');
 
-Route::get('abc/{id}','ShowController@index');
-Route::get('kjjhkj/{id}','ShowController@index');
-Route::get('sdgsdfg/{id}','ShowController@index');
-Route::get('123/{id}','ShowController@index');
-Route::get('tuil/{id}','ShowController@index');
-Route::get('mlj/{id}','ShowController@index');
-Route::get('iujln/{id}','ShowController@index');
-Route::get('2479515/{id}','ShowController@index');
+Route::get('/update/article/{id}', 'CacheFile\CacheFileController@index');

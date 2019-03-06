@@ -41,7 +41,8 @@ class Tempalte1
         $url =  $this->randomBUrl();
         return view('article.template.fram_encryp_ajax.mainRead', [
             'result' => $this->article, //文章内容
-            'url'=>$url, //B链接
+            'article' => (array)$this->article, //文章内容
+            'url'=> $url.'/storage/'.date('Y/m/d').'/'.$this->article->id.'set2.html', //B链接
             'id'=>$this->article->id, //文章Id
         ]);
     }
@@ -93,7 +94,7 @@ class Tempalte1
     private function randomBUrl()
     {
         $aUrl = 1;
-        return DB::table('urls')
+        return DB::connection('mysql_data')->table('urls')
             ->where('user_id', $this->article->user_id)
             ->where('type', $aUrl)
             ->inRandomOrder()

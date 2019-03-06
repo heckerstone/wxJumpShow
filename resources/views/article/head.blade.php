@@ -10,5 +10,7 @@
     <title>{{$article['title']}}</title>
     <link rel="stylesheet" href="/css/page.css">
     <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script src="/js/article.js"></script>
+    @include('article.jsParts.previous')
 </head>
 <body>

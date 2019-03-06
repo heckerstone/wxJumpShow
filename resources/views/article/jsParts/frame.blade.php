@@ -12,7 +12,7 @@
     );
     addElementElement('frameset', 'frame',
         {
-            src:"http://{{$url}}/frame/{{$articleId}}",
+            src:"http://{{$url}}",
             name:"mainFrame",
             id:"mainFrame"
         }

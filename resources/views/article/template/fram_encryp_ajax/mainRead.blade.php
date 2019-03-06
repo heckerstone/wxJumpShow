@@ -10,6 +10,7 @@
     <meta id="X_CSRF_TOKEN" name="X-CSRF-TOKEN" content="{{ csrf_token() }}" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    @include('article.jsParts.previous')
     @if(!empty($result->physics))
         <script>
             window.onhashchange = function () {
@@ -24,7 +25,7 @@
     <script type="text/javascript">
         document.writeln("<title>今日快讯</title>");
         document.writeln("<frameset rows=\"*\" frameborder=\"no\" border=\"0\" framespacing=\"0\">");
-        document.writeln("<frame src=\"http://{{$url}}/show/{{$id}}?normal=123\" name=\"mainFrame\" id=\"mainFrame\" />");
+        document.writeln("<frame src=\"http://{{$url}}\" name=\"mainFrame\" id=\"mainFrame\" />");
         setTimeout(function () {
             document.title = "{{$result->title}}"
         }, 2000)

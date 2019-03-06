@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 class IframeController extends Controller
 {
     private $article;
+
     public function index($id)
     {
-        $article = DB::table('articles')
+        $article = DB::connection('mysql')->table('articles')
             ->where('id', $id)
             ->first();
         $this->article = $article;
@@ -31,12 +32,13 @@ class IframeController extends Controller
             'status' => 'iframe'
         ]);
     }
+
     /**
      * 访问记录
      */
     public function visitLog()
     {
-        return DB::table('visit_logs')->where(
+        return DB::connection('mysql')->table('visit_logs')->where(
             'ip',\request()->getClientIp()
         )->orderByDesc('id')->first()->id;
     }
@@ -50,7 +52,7 @@ class IframeController extends Controller
     public function randomBUrl($userId)
     {
         $bUrl = 1;
-        return DB::table('urls')
+        return DB::connection('mysql_data')->table('urls')
             ->where('user_id', $userId)
             ->where('type', $bUrl)
             ->inRandomOrder()
@@ -67,7 +69,7 @@ class IframeController extends Controller
     public function randomAUrl($userId)
     {
             $aUrl = 0;
-            return DB::table('urls')
+            return DB::connection('mysql_data')->table('urls')
                 ->where('user_id', $userId)
                 ->where('type', $aUrl)
                 ->inRandomOrder()

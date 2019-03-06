@@ -3,7 +3,7 @@
     {{--统计代码--}}
     {!! $article['cnzz'] !!}
 </div>
-<script src="/js/article.js"></script>
+
 <script>
     hh();
             @if($article['appid'] != '' && $article['key'] != '')

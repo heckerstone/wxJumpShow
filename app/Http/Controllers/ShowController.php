@@ -26,7 +26,6 @@ class ShowController extends Controller
     {
         $this->article = DB::table('articles')
             ->find($id);
-
         //改自增的字段值进行自增
         $this->increment($this->article->id);
 
@@ -166,7 +165,7 @@ class ShowController extends Controller
      */
     public function getArticle($id)
     {
-        $this->article = DB::table('articles')
+        $this->article = DB::connection('mysql')->table('articles')
             ->where('id', $id)
             ->first();
         return response()->json($this->article);
@@ -212,19 +211,6 @@ class ShowController extends Controller
                 throw new SourceCheckException();
             }
         }
-
-//        if ($this->article->is_wechat === 0) {  //跳转出浏览器打开
-//            $userAgent = $request->header('user-agent');
-//            if (strpos($userAgent, 'MicroMessenger') !== false) { //如果当前在微信环境中给出下载头
-//                header("Content-type:application/pdf");
-//                header("Content-Disposition:attachment;filename='downloaded.pdf'");
-//            }
-//// else {
-////                if (empty($request->get('one'))) { //防止重复跳转
-////                    header('location:'.URL::current().'?one=1');
-////                }
-////            }
-//        }
     }
 
     /**
@@ -260,12 +246,12 @@ class ShowController extends Controller
      */
     public function updateEvent($id)
     {
-        $log = DB::table('visit_logs')
+        $log = DB::connection('mysql')->table('visit_logs')
             ->where('id', $id)
             ->first();
         $event = \request()->get('event');
 
-        DB::table('visit_logs')
+        DB::connection('mysql')->table('visit_logs')
             ->where('id', $id)->update([
                 'event'=>"{$log->event},{$event}"
          ]);
