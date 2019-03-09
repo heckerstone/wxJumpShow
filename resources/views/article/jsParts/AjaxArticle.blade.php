@@ -1,8 +1,6 @@
 <script>
     var ajax = new XMLHttpRequest();
-    ajax.open('post', '{{url('getArticle')}}/' + '{{$articleId}}');
-    ajax.setRequestHeader( '_token', '{{csrf_token()}}');
-    ajax.setRequestHeader( 'X-CSRF-TOKEN', '{{csrf_token()}}');
+    ajax.open('post', '{{$url}}');
     ajax.send();
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200) {

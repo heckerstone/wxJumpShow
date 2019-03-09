@@ -14,3 +14,4 @@
     @include('article.jsParts.previous')
 </head>
 <body>
+<input style="display: none;" type="text" id="articleId" value="{{$article['id']}}">

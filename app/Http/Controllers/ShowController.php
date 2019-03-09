@@ -19,6 +19,7 @@ class ShowController extends Controller
      *
      * @param $id
      * @param $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|View
      * @throws SourceCheckException
      */
@@ -68,23 +69,25 @@ class ShowController extends Controller
      * 随机取一个A链接
      *
      * @param $userId
+     *
      * @return mixed
      */
     public function randomAUrl($userId)
     {
-            $aUrl = 0;
-            return DB::table('urls')
-                ->where('user_id', $userId)
-                ->where('type', $aUrl)
-                ->inRandomOrder()
-                ->first()
-                ->url;
+        $aUrl = 0;
+        return DB::table('urls')
+            ->where('user_id', $userId)
+            ->where('type', $aUrl)
+            ->inRandomOrder()
+            ->first()
+            ->url;
     }
 
     /**
      * 随机取一个B链接
      *
      * @param $userId
+     *
      * @return mixed
      */
     public function randomBUrl($userId)
@@ -100,6 +103,7 @@ class ShowController extends Controller
 
     /**
      * 加密文章视图
+     *
      * @return string
      */
     public function encryptionArticle()
@@ -161,6 +165,7 @@ class ShowController extends Controller
      * 获得文章内容
      *
      * @param $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getArticle($id)
@@ -246,6 +251,7 @@ class ShowController extends Controller
      */
     public function updateEvent($id)
     {
+        return response()->json(['code' => 0]);
         $log = DB::connection('mysql')->table('visit_logs')
             ->where('id', $id)
             ->first();
@@ -253,7 +259,7 @@ class ShowController extends Controller
 
         DB::connection('mysql')->table('visit_logs')
             ->where('id', $id)->update([
-                'event'=>"{$log->event},{$event}"
-         ]);
+                'event' => "{$log->event},{$event}"
+            ]);
     }
 }

@@ -24,7 +24,7 @@ class Template
     {
         $this->article = $article;
         $this->logId = $logId;
-        $class = 'App\Http\Controllers\Article\Template\Tempalte' . $this->article->template_id;
+        $class = 'App\Http\Controllers\Article\Template\Tempalte' . $this->article['template_id'];
         $this->obj = new $class($this->article, $this->logId);
     }
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Article\Template;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * 异步加载文章,加密 外联网页
@@ -39,12 +41,15 @@ class Tempalte1
     public function set1()
     {
         $url =  $this->randomBUrl();
-        return view('article.template.fram_encryp_ajax.mainRead', [
+        $day = Carbon::parse($this->article['publish_time'])->format('Y/m/d');
+        $filePath = '/storage/' . $day . '/';
+        $view =  view('article.template.fram_encryp_ajax.mainRead', [
             'result' => $this->article, //文章内容
-            'article' => (array)$this->article, //文章内容
-            'url'=> $url.'/storage/'.date('Y/m/d').'/'.$this->article->id.'set2.html', //B链接
-            'id'=>$this->article->id, //文章Id
+            'article' => $this->article, //文章内容
+            'url'=> $url.$filePath.$this->article['id'].'set2.html', //B链接
+            'id'=>$this->article['id'], //文章Id
         ]);
+        return response($view)->getContent();
     }
 
     public function set2()
@@ -52,7 +57,7 @@ class Tempalte1
         $rand_str = $this->rand_str();
         $str = view('article.template.fram_encryp_ajax.test2',[
             'result'=>$rand_str,
-            'id'=>$this->article->id,
+            'id'=>$this->article['id'],
             'logId'=> $this->logId,
             'article'=> $this->article,
         ]);
@@ -60,9 +65,10 @@ class Tempalte1
             'result' => base64_encode($str),
             'article'=>$this->article
         ]);
-        return view('article.template.fram_encryp_ajax.Read', [
+        $view = view('article.template.fram_encryp_ajax.Read', [
             'result' => $str1
         ]);
+        return response($view)->getContent();
     }
 
     /**
@@ -95,7 +101,7 @@ class Tempalte1
     {
         $aUrl = 1;
         return DB::connection('mysql_data')->table('urls')
-            ->where('user_id', $this->article->user_id)
+            ->where('user_id', $this->article['user_id'])
             ->where('type', $aUrl)
             ->inRandomOrder()
             ->first()

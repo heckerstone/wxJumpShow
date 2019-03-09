@@ -28,14 +28,18 @@
         return pwd;
     }
 
+    @php
+   $day = \Carbon\Carbon::parse($article->publish_time)->format('Y/m/d');
+    $filePath = '/storage/' . $day . '/'.$id.'.html';
+    @endphp
     @if($article->is_jump == 1)
     //主域名跳转
-        let url = "http://{{$host}}/show/{!! $id !!}?s={!! $timestampUrl !!}";
+        let url = "http://{{$host}}{{$filePath}}?s={!! $timestampUrl !!}";
     @endif
     @if($article->is_jump === 0)
     //随机二级域名跳转
         var tempString = randomString(5);
-        var realurl = "http://aaa.{!! $host !!}/show/{!! $id !!}?s={!! $timestampUrl !!}";
+        var realurl = "http://aaa.{!! $host !!}{{$filePath}}?s={!! $timestampUrl !!}";
         let url = realurl.replace("aaa", tempString);
     @endif
      @if($article->is_jump === null)

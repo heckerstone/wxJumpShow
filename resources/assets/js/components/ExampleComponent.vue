@@ -23,8 +23,9 @@
             }
         },
         created: function () {
-            let one = location.href.split('#', 5);
-            let id = one[0].split('/',5)[4];
+            // let one = location.href.split('#', 5);
+            // let id = one[0].split('/',5)[4];
+            let id = document.getElementById('articleId').value;
             axios.post('/getArticle/' + id).then(response => {
                 this.content = response.data.content;
                 this.photo = response.data.photo;

@@ -10,9 +10,9 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
 
-        @if(!empty($result->physics))
+        @if(!empty($result['physics']))
             window.onhashchange = function () {
-                jump("{{$article->physics}}");
+                jump("{{$article['physics']}}");
             };
             function hh() {
                 history.pushState(history.length + 1, "app", "#dddc_" + new Date().getTime());
@@ -20,10 +20,10 @@
             hh();
         @endif
 
-        @if($article->appid != '' && $article->key != '')
+        @if($article['appid'] != '' && $article['key'] != '')
             @php
                 $jssdk = new \App\Http\Controllers\WeixinJssdkController();
-                $jssdk->seter($article->appid, $article->key);
+                $jssdk->seter($article['appid'], $article['key']);
                 $signPackage = $jssdk->GetSignPackage();
             @endphp
             @include('article.jsParts.wxShare')

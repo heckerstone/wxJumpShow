@@ -162,7 +162,7 @@
 
 <div class="item_wrap rel" style="padding:0px;">
     <ul style="list-style-type:none;">
-        @if(!empty($article->arrow))
+        @if(!empty($article['arrow']))
             <div id="fhui"></div>
         @endif
         <div class="mains" style="overflow:hidden;height:1px;">
