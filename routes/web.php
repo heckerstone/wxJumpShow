@@ -34,3 +34,12 @@ Route::post('getArticle/{id}', 'ShowController@getArticle');
 Route::post('updateEvent/{id}', 'ShowController@updateEvent');
 
 Route::get('/update/article/{id}', 'CacheFile\CacheFileController@index');
+
+Route::any('tt',function (){
+  return view('tt', [
+      'url'=>'http://www.shows.com/bb'
+  ]);
+});
+Route::any('bb',function (){
+    return view('bb');
+});
