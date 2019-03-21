@@ -35,11 +35,12 @@ Route::post('updateEvent/{id}', 'ShowController@updateEvent');
 
 Route::get('/update/article/{id}', 'CacheFile\CacheFileController@index');
 
-Route::any('tt',function (){
-  return view('tt', [
-      'url'=>'http://www.shows.com/bb'
-  ]);
-});
-Route::any('bb',function (){
-    return view('bb');
+
+Route::any('form/{id}', function ($id) {
+    $article = (array)\Illuminate\Support\Facades\DB::connection('mysql_data')
+        ->table('articles')
+        ->where('id', $id)
+        ->first();
+    $obj = new  \App\Http\Controllers\Article\Template\Tempalte2($article);
+    return $obj->getContent();
 });
